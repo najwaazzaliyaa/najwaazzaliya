@@ -52,27 +52,64 @@
   .card h3{font-size:14px;font-weight:500;margin-bottom:6px;color:var(--text)}
   .card p{font-size:12px;color:var(--muted);line-height:1.6}
 
-  .upload-btn{background:var(--rose-light);border:1px dashed var(--rose-mid);border-radius:12px;padding:10px 20px;font-size:13px;color:var(--rose-dark);cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif}
-  .upload-btn:hover{background:var(--rose);color:var(--white)}
-  #file-input{display:none}
-  .empty-state{text-align:center;padding:48px 20px;color:var(--muted)}
-  .empty-state .e-icon{font-size:40px;margin-bottom:12px;opacity:0.4}
+  /* TUGAS FOLDER GRID */
+  .tugas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-bottom:24px}
+  .tugas-folder{background:var(--white);border:1px solid #f0e8ea;border-radius:16px;padding:18px 14px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative}
+  .tugas-folder:hover{box-shadow:0 6px 24px rgba(176,90,106,0.12);transform:translateY(-2px);border-color:var(--rose)}
+  .tugas-folder.active-folder{border:2px solid var(--rose-mid);background:var(--rose-light)}
+  .folder-emoji{font-size:32px;margin-bottom:8px;display:block}
+  .folder-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px}
+  .folder-count{font-size:11px;color:var(--muted)}
+  .folder-delete{position:absolute;top:8px;right:8px;background:none;border:none;font-size:14px;color:var(--muted);cursor:pointer;opacity:0;transition:opacity 0.2s;line-height:1}
+  .tugas-folder:hover .folder-delete{opacity:1}
+  .folder-delete:hover{color:#c0392b}
+
+  .add-folder-btn{background:var(--rose-light);border:2px dashed var(--rose);border-radius:16px;padding:18px 14px;text-align:center;cursor:pointer;transition:all 0.2s;color:var(--rose-dark);font-size:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:100px}
+  .add-folder-btn:hover{background:var(--rose);color:white;border-color:var(--rose-mid)}
+  .add-folder-btn span{font-size:24px}
+
+  /* FILE AREA */
+  .file-area{background:var(--white);border:1px solid #f0e8ea;border-radius:16px;padding:20px;margin-top:8px}
+  .file-area-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .file-area-title{font-size:15px;font-weight:500;color:var(--rose-dark);display:flex;align-items:center;gap:8px}
+  .back-btn{background:none;border:1px solid #f0e8ea;border-radius:999px;padding:5px 14px;font-size:12px;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+  .back-btn:hover{background:var(--rose-light);color:var(--rose-dark)}
+
+  .upload-btn{background:var(--rose-light);border:1px dashed var(--rose-mid);border-radius:12px;padding:8px 18px;font-size:13px;color:var(--rose-dark);cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif}
+  .upload-btn:hover{background:var(--rose-dark);color:var(--white)}
+  .file-input{display:none}
+  .empty-state{text-align:center;padding:36px 20px;color:var(--muted)}
+  .empty-state .e-icon{font-size:36px;margin-bottom:10px;opacity:0.4}
   .empty-state p{font-size:13px;line-height:1.6}
   .file-list{display:flex;flex-direction:column;gap:10px}
-  .file-item{background:var(--white);border:1px solid #f0e8ea;border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;transition:all 0.2s}
+  .file-item{background:var(--cream);border:1px solid #f0e8ea;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;transition:all 0.2s}
   .file-item:hover{box-shadow:0 4px 16px rgba(176,90,106,0.08)}
-  .file-icon{width:36px;height:36px;border-radius:10px;background:var(--rose-light);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  .file-icon{width:34px;height:34px;border-radius:10px;background:var(--rose-light);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
   .file-info{flex:1;min-width:0}
-  .file-name{font-size:14px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .file-name{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .file-meta{font-size:11px;color:var(--muted);margin-top:2px}
   .file-actions{display:flex;gap:6px}
-  .btn-sm{background:none;border:1px solid #f0e8ea;border-radius:8px;padding:5px 12px;font-size:11px;color:var(--muted);cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif}
+  .btn-sm{background:none;border:1px solid #f0e8ea;border-radius:8px;padding:4px 12px;font-size:11px;color:var(--muted);cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif}
   .btn-sm:hover{background:var(--rose-light);color:var(--rose-dark);border-color:var(--rose)}
   .btn-sm.del:hover{background:#ffeaea;color:#c0392b;border-color:#ffb3b3}
-  .folder-stats{display:flex;gap:16px;margin-bottom:20px}
-  .stat-pill{background:var(--warm);border-radius:999px;padding:6px 14px;font-size:12px;color:var(--muted)}
+
+  .folder-stats{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+  .stat-pill{background:var(--warm);border-radius:999px;padding:5px 14px;font-size:12px;color:var(--muted)}
   .stat-pill span{color:var(--rose-dark);font-weight:500}
 
+  /* MODAL */
+  .modal-bg{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(58,42,48,0.3);z-index:200;align-items:center;justify-content:center}
+  .modal-bg.show{display:flex}
+  .modal{background:var(--white);border-radius:20px;padding:28px;width:320px;box-shadow:0 8px 32px rgba(176,90,106,0.15)}
+  .modal h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;margin-bottom:6px;color:var(--text)}
+  .modal p{font-size:13px;color:var(--muted);margin-bottom:18px}
+  .modal input{width:100%;padding:10px 14px;border:1px solid #f0e8ea;border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;margin-bottom:14px;transition:border 0.2s}
+  .modal input:focus{border-color:var(--rose-mid)}
+  .modal-btns{display:flex;gap:10px;justify-content:flex-end}
+  .btn-cancel{background:none;border:1px solid #f0e8ea;border-radius:999px;padding:8px 18px;font-size:13px;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif}
+  .btn-cancel:hover{background:var(--warm)}
+
+  /* KONTAK */
   .contact-card{background:linear-gradient(135deg,#fdf0f2,#f0eafa);border:1px solid var(--rose);border-radius:20px;padding:28px;text-align:center}
   .contact-card h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;margin-bottom:8px;color:var(--text)}
   .contact-card p{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7}
@@ -83,12 +120,8 @@
   .divider{height:1px;background:linear-gradient(90deg,transparent,var(--rose),transparent);margin:8px 0 36px}
   footer{text-align:center;padding:24px;font-size:12px;color:var(--muted);border-top:1px solid #f0e8ea}
 
-  input[type="text"], input[type="email"], textarea {
-    width:100%;padding:10px 14px;border:1px solid #f0e8ea;border-radius:10px;
-    font-size:14px;font-family:'DM Sans',sans-serif;background:var(--white);
-    color:var(--text);outline:none;transition:border 0.2s;
-  }
-  input:focus, textarea:focus{border-color:var(--rose-mid)}
+  input[type="text"],input[type="email"],textarea{width:100%;padding:10px 14px;border:1px solid #f0e8ea;border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text);outline:none;transition:border 0.2s}
+  input:focus,textarea:focus{border-color:var(--rose-mid)}
   textarea{resize:vertical}
 </style>
 </head>
@@ -118,32 +151,15 @@
     </div>
     <button class="btn-primary" onclick="showPage('tugas')">Lihat Folder Tugas →</button>
   </div>
-
   <div class="section">
     <div class="divider"></div>
     <p class="section-title">Tentang Aku</p>
     <p class="section-subtitle">Sekilas tentang Sheira Najwa Azzaliya</p>
     <div class="card-grid">
-      <div class="card">
-        <div class="card-icon rose">🌸</div>
-        <h3>Akademik</h3>
-        <p>Mahasiswi aktif yang berdedikasi penuh terhadap pendidikan dan pengembangan diri.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon lav">📚</div>
-        <h3>Belajar</h3>
-        <p>Senang mengeksplorasi berbagai ilmu dan selalu ingin tahu hal-hal baru.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon rose">✨</div>
-        <h3>Kreatif</h3>
-        <p>Menyukai hal-hal estetis dan mengekspresikan diri melalui berbagai cara.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon lav">🎯</div>
-        <h3>Fokus</h3>
-        <p>Berkomitmen untuk mencapai tujuan dengan kerja keras dan konsistensi.</p>
-      </div>
+      <div class="card"><div class="card-icon rose">🌸</div><h3>Akademik</h3><p>Mahasiswi aktif yang berdedikasi penuh terhadap pendidikan dan pengembangan diri.</p></div>
+      <div class="card"><div class="card-icon lav">📚</div><h3>Belajar</h3><p>Senang mengeksplorasi berbagai ilmu dan selalu ingin tahu hal-hal baru.</p></div>
+      <div class="card"><div class="card-icon rose">✨</div><h3>Kreatif</h3><p>Menyukai hal-hal estetis dan mengekspresikan diri melalui berbagai cara.</p></div>
+      <div class="card"><div class="card-icon lav">🎯</div><h3>Fokus</h3><p>Berkomitmen untuk mencapai tujuan dengan kerja keras dan konsistensi.</p></div>
     </div>
   </div>
 </div>
@@ -152,25 +168,39 @@
 <div class="page" id="page-tugas">
   <div class="section">
     <p class="section-title">📁 Folder Tugas</p>
-    <p class="section-subtitle">Simpan dan kelola semua file tugas Sheira di sini</p>
+    <p class="section-subtitle">Klik folder untuk upload file, atau tambah folder tugas baru</p>
 
     <div class="folder-stats">
-      <div class="stat-pill">Total file: <span id="file-count">0</span></div>
-      <div class="stat-pill">Ukuran: <span id="total-size">0 KB</span></div>
+      <div class="stat-pill">Total folder: <span id="folder-count">0</span></div>
+      <div class="stat-pill">Total file: <span id="total-file-count">0</span></div>
     </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-      <span style="font-size:13px;color:var(--muted)">Klik tombol untuk upload file tugasmu</span>
-      <label for="file-input" class="upload-btn">+ Upload File</label>
-      <input type="file" id="file-input" multiple onchange="handleFiles(this.files)">
+    <!-- FOLDER GRID VIEW -->
+    <div id="folder-view">
+      <div class="tugas-grid" id="tugas-grid"></div>
     </div>
 
-    <div id="file-list-container">
-      <div class="empty-state" id="empty-state">
-        <div class="e-icon">🗂️</div>
-        <p>Belum ada file tugas.<br>Upload file pertamamu sekarang!</p>
+    <!-- FILE VIEW (when folder is open) -->
+    <div id="file-view" style="display:none">
+      <div class="file-area">
+        <div class="file-area-header">
+          <div class="file-area-title">
+            <span>📂</span>
+            <span id="open-folder-name">Tugas 1</span>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <label class="upload-btn" id="upload-label">+ Upload File
+              <input type="file" class="file-input" id="file-input" multiple onchange="handleFiles(this.files)">
+            </label>
+            <button class="back-btn" onclick="closeFolder()">← Kembali</button>
+          </div>
+        </div>
+        <div id="file-empty" class="empty-state">
+          <div class="e-icon">🗂️</div>
+          <p>Belum ada file di folder ini.<br>Upload file tugasmu sekarang!</p>
+        </div>
+        <div class="file-list" id="file-list"></div>
       </div>
-      <div class="file-list" id="file-list"></div>
     </div>
   </div>
 </div>
@@ -189,7 +219,6 @@
         <span class="social-btn">💼 LinkedIn</span>
       </div>
     </div>
-
     <div style="margin-top:28px">
       <div class="card" style="background:var(--warm);border:none">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
@@ -210,18 +239,101 @@
   </div>
 </div>
 
-<footer>
-  <p>✦ Sheira Najwa Azzaliya · Personal Website ✦</p>
-</footer>
+<footer><p>✦ Sheira Najwa Azzaliya · Personal Website ✦</p></footer>
+
+<!-- MODAL TAMBAH FOLDER -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <h3>Tambah Folder Tugas</h3>
+    <p>Masukkan nama folder tugasmu</p>
+    <input type="text" id="folder-name-input" placeholder="contoh: Tugas 4" onkeydown="if(event.key==='Enter')saveFolder()">
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal()">Batal</button>
+      <button class="btn-primary" onclick="saveFolder()">Buat Folder</button>
+    </div>
+  </div>
+</div>
 
 <script>
-  let files = [];
+  // DATA
+  let folders = [
+    {id:1, name:'Tugas 1', files:[]},
+    {id:2, name:'Tugas 2', files:[]},
+    {id:3, name:'Tugas 3', files:[]},
+  ];
+  let nextId = 4;
+  let openFolderId = null;
 
   function showPage(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById('page-' + page).classList.add('active');
     document.getElementById('nav-' + page).classList.add('active');
+    if(page === 'tugas') renderFolders();
+  }
+
+  function renderFolders() {
+    const grid = document.getElementById('tugas-grid');
+    document.getElementById('folder-count').textContent = folders.length;
+    const totalFiles = folders.reduce((a,f) => a + f.files.length, 0);
+    document.getElementById('total-file-count').textContent = totalFiles;
+
+    grid.innerHTML = folders.map(f => `
+      <div class="tugas-folder" onclick="openFolder(${f.id})">
+        <button class="folder-delete" onclick="event.stopPropagation();deleteFolder(${f.id})">✕</button>
+        <span class="folder-emoji">🗂️</span>
+        <div class="folder-name">${f.name}</div>
+        <div class="folder-count">${f.files.length} file</div>
+      </div>
+    `).join('') + `
+      <div class="add-folder-btn" onclick="openModal()">
+        <span>＋</span>
+        <div style="font-size:13px">Tambah Folder</div>
+      </div>
+    `;
+  }
+
+  function openFolder(id) {
+    openFolderId = id;
+    const folder = folders.find(f => f.id === id);
+    document.getElementById('open-folder-name').textContent = folder.name;
+    document.getElementById('folder-view').style.display = 'none';
+    document.getElementById('file-view').style.display = 'block';
+    renderFileList();
+  }
+
+  function closeFolder() {
+    openFolderId = null;
+    document.getElementById('folder-view').style.display = 'block';
+    document.getElementById('file-view').style.display = 'none';
+    document.getElementById('file-input').value = '';
+    renderFolders();
+  }
+
+  function deleteFolder(id) {
+    if(confirm('Hapus folder ini beserta semua filenya?')) {
+      folders = folders.filter(f => f.id !== id);
+      renderFolders();
+    }
+  }
+
+  function openModal() {
+    document.getElementById('modal-bg').classList.add('show');
+    setTimeout(() => document.getElementById('folder-name-input').focus(), 100);
+    document.getElementById('folder-name-input').value = 'Tugas ' + nextId;
+  }
+
+  function closeModal() {
+    document.getElementById('modal-bg').classList.remove('show');
+    document.getElementById('folder-name-input').value = '';
+  }
+
+  function saveFolder() {
+    const name = document.getElementById('folder-name-input').value.trim();
+    if(!name) return;
+    folders.push({id: nextId++, name, files:[]});
+    closeModal();
+    renderFolders();
   }
 
   function getFileIcon(name) {
@@ -231,60 +343,43 @@
   }
 
   function formatSize(bytes) {
-    if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
+    if(bytes < 1024) return bytes + ' B';
+    if(bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
     return (bytes/1048576).toFixed(1) + ' MB';
   }
 
   function handleFiles(fileList) {
-    for (let f of fileList) {
-      files.push({
+    const folder = folders.find(f => f.id === openFolderId);
+    if(!folder) return;
+    for(let f of fileList) {
+      folder.files.push({
         id: Date.now() + Math.random(),
         name: f.name,
         size: f.size,
-        date: new Date().toLocaleDateString('id-ID', {day:'numeric',month:'short',year:'numeric'}),
+        date: new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'}),
         obj: f
       });
     }
-    renderFiles();
+    renderFileList();
   }
 
-  function deleteFile(id) {
-    files = files.filter(f => f.id !== id);
-    renderFiles();
-  }
-
-  function downloadFile(id) {
-    const f = files.find(x => x.id === id);
-    if (!f) return;
-    const url = URL.createObjectURL(f.obj);
-    const a = document.createElement('a');
-    a.href = url; a.download = f.name; a.click();
-    URL.revokeObjectURL(url);
-  }
-
-  function renderFiles() {
-    const container = document.getElementById('file-list');
-    const empty = document.getElementById('empty-state');
-    const count = document.getElementById('file-count');
-    const totalSize = document.getElementById('total-size');
-
-    count.textContent = files.length;
-    const total = files.reduce((a,f) => a + f.size, 0);
-    totalSize.textContent = formatSize(total);
-
-    if (files.length === 0) {
+  function renderFileList() {
+    const folder = folders.find(f => f.id === openFolderId);
+    if(!folder) return;
+    const list = document.getElementById('file-list');
+    const empty = document.getElementById('file-empty');
+    if(folder.files.length === 0) {
       empty.style.display = 'block';
-      container.innerHTML = '';
+      list.innerHTML = '';
       return;
     }
     empty.style.display = 'none';
-    container.innerHTML = files.map(f => `
+    list.innerHTML = folder.files.map(f => `
       <div class="file-item">
         <div class="file-icon">${getFileIcon(f.name)}</div>
         <div class="file-info">
           <div class="file-name">${f.name}</div>
-          <div class="file-meta">${formatSize(f.size)} · Diunggah ${f.date}</div>
+          <div class="file-meta">${formatSize(f.size)} · ${f.date}</div>
         </div>
         <div class="file-actions">
           <button class="btn-sm" onclick="downloadFile(${f.id})">Unduh</button>
@@ -293,6 +388,31 @@
       </div>
     `).join('');
   }
+
+  function deleteFile(id) {
+    const folder = folders.find(f => f.id === openFolderId);
+    if(!folder) return;
+    folder.files = folder.files.filter(f => f.id !== id);
+    renderFileList();
+  }
+
+  function downloadFile(id) {
+    const folder = folders.find(f => f.id === openFolderId);
+    if(!folder) return;
+    const f = folder.files.find(x => x.id === id);
+    if(!f) return;
+    const url = URL.createObjectURL(f.obj);
+    const a = document.createElement('a');
+    a.href = url; a.download = f.name; a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  // close modal on bg click
+  document.getElementById('modal-bg').addEventListener('click', function(e){
+    if(e.target === this) closeModal();
+  });
+
+  renderFolders();
 </script>
 </body>
 </html>
