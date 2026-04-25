@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sheira Najwa Azzaliya — Personal Website</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --rose:#f4c5cc;--rose-light:#fdf0f2;--rose-mid:#e8929e;--rose-dark:#b05a6a;
+    --lavender:#e4daf4;--lav-mid:#9b85c8;--lav-dark:#6a4f9e;
+    --cream:#fdfaf7;--warm:#f7f0e8;--text:#3a2a30;--muted:#8c7580;
+    --white:#ffffff;
+  }
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+  .nav{background:rgba(253,240,242,0.92);backdrop-filter:blur(8px);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rose);position:sticky;top:0;z-index:100}
+  .nav-brand{font-family:'Playfair Display',serif;font-size:18px;color:var(--rose-dark);letter-spacing:0.5px}
+  .nav-links{display:flex;gap:24px}
+  .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:0.3px;cursor:pointer;transition:color 0.2s}
+  .nav-links a:hover,.nav-links a.active{color:var(--rose-dark)}
+
+  .page{display:none;animation:fadeIn 0.4s ease}
+  .page.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+  .hero{padding:60px 32px 48px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative}
+  .hero::before{content:'';position:absolute;top:0;left:0;right:0;height:320px;background:linear-gradient(160deg,#fdf0f2 0%,#f0eafa 60%,var(--cream) 100%);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .avatar{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--lavender));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:36px;color:#fff;margin-bottom:20px;border:4px solid white;box-shadow:0 4px 20px rgba(176,90,106,0.15)}
+  .hero h1{font-family:'Playfair Display',serif;font-size:32px;font-weight:400;color:var(--text);line-height:1.2;margin-bottom:6px}
+  .hero h1 em{color:var(--rose-dark);font-style:italic}
+  .hero-sub{font-size:14px;color:var(--muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:20px}
+  .hero-bio{font-size:15px;color:var(--muted);max-width:420px;line-height:1.8;margin-bottom:28px}
+  .hero-tags{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:32px}
+  .tag{background:var(--rose-light);border:1px solid var(--rose);border-radius:999px;padding:5px 14px;font-size:12px;color:var(--rose-dark);letter-spacing:0.3px}
+  .tag.lav{background:#f0eafa;border-color:var(--lavender);color:var(--lav-dark)}
+  .btn-primary{background:var(--rose-dark);color:white;border:none;border-radius:999px;padding:11px 28px;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;letter-spacing:0.3px;transition:all 0.2s}
+  .btn-primary:hover{background:#8e4456;transform:translateY(-1px)}
+
+  .section-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--text);margin-bottom:4px}
+  .section-subtitle{font-size:13px;color:var(--muted);margin-bottom:28px;letter-spacing:0.3px}
+  .section{padding:40px 32px;max-width:700px;margin:0 auto}
+
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+  .card{background:var(--white);border:1px solid #f0e8ea;border-radius:16px;padding:20px;transition:all 0.2s}
+  .card:hover{box-shadow:0 6px 24px rgba(176,90,106,0.1);transform:translateY(-2px)}
+  .card-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:18px}
+  .card-icon.rose{background:var(--rose-light)}
+  .card-icon.lav{background:#f0eafa}
+  .card h3{font-size:14px;font-weight:500;margin-bottom:6px;color:var(--text)}
+  .card p{font-size:12px;color:var(--muted);line-height:1.6}
+
+  .upload-btn{background:var(--rose-light);border:1px dashed var(--rose-mid);border-radius:12px;padding:10px 20px;font-size:13px;color:var(--rose-dark);cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif}
+  .upload-btn:hover{background:var(--rose);color:var(--white)}
+  #file-input{display:none}
+  .empty-state{text-align:center;padding:48px 20px;color:var(--muted)}
+  .empty-state .e-icon{font-size:40px;margin-bottom:12px;opacity:0.4}
+  .empty-state p{font-size:13px;line-height:1.6}
+  .file-list{display:flex;flex-direction:column;gap:10px}
+  .file-item{background:var(--white);border:1px solid #f0e8ea;border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;transition:all 0.2s}
+  .file-item:hover{box-shadow:0 4px 16px rgba(176,90,106,0.08)}
+  .file-icon{width:36px;height:36px;border-radius:10px;background:var(--rose-light);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  .file-info{flex:1;min-width:0}
+  .file-name{font-size:14px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .file-meta{font-size:11px;color:var(--muted);margin-top:2px}
+  .file-actions{display:flex;gap:6px}
+  .btn-sm{background:none;border:1px solid #f0e8ea;border-radius:8px;padding:5px 12px;font-size:11px;color:var(--muted);cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif}
+  .btn-sm:hover{background:var(--rose-light);color:var(--rose-dark);border-color:var(--rose)}
+  .btn-sm.del:hover{background:#ffeaea;color:#c0392b;border-color:#ffb3b3}
+  .folder-stats{display:flex;gap:16px;margin-bottom:20px}
+  .stat-pill{background:var(--warm);border-radius:999px;padding:6px 14px;font-size:12px;color:var(--muted)}
+  .stat-pill span{color:var(--rose-dark);font-weight:500}
+
+  .contact-card{background:linear-gradient(135deg,#fdf0f2,#f0eafa);border:1px solid var(--rose);border-radius:20px;padding:28px;text-align:center}
+  .contact-card h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;margin-bottom:8px;color:var(--text)}
+  .contact-card p{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7}
+  .social-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+  .social-btn{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid #f0e8ea;border-radius:999px;padding:8px 18px;font-size:13px;color:var(--text);text-decoration:none;transition:all 0.2s;cursor:pointer}
+  .social-btn:hover{background:var(--rose-dark);color:white;border-color:var(--rose-dark)}
+
+  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--rose),transparent);margin:8px 0 36px}
+  footer{text-align:center;padding:24px;font-size:12px;color:var(--muted);border-top:1px solid #f0e8ea}
+
+  input[type="text"], input[type="email"], textarea {
+    width:100%;padding:10px 14px;border:1px solid #f0e8ea;border-radius:10px;
+    font-size:14px;font-family:'DM Sans',sans-serif;background:var(--white);
+    color:var(--text);outline:none;transition:border 0.2s;
+  }
+  input:focus, textarea:focus{border-color:var(--rose-mid)}
+  textarea{resize:vertical}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">Sheira Najwa</span>
+  <div class="nav-links">
+    <a onclick="showPage('home')" class="active" id="nav-home">Beranda</a>
+    <a onclick="showPage('tugas')" id="nav-tugas">Tugas</a>
+    <a onclick="showPage('kontak')" id="nav-kontak">Kontak</a>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="avatar">SN</div>
+    <p class="hero-sub">Personal Website</p>
+    <h1>Halo, aku <em>Sheira</em> 👋</h1>
+    <p class="hero-bio">Sheira Najwa Azzaliya — seorang mahasiswi yang penuh semangat, suka belajar hal baru, dan percaya bahwa setiap hari adalah kesempatan untuk berkembang.</p>
+    <div class="hero-tags">
+      <span class="tag">✦ Mahasiswi</span>
+      <span class="tag lav">✦ Pelajar</span>
+      <span class="tag">✦ Kreatif</span>
+      <span class="tag lav">✦ Semangat Belajar</span>
+    </div>
+    <button class="btn-primary" onclick="showPage('tugas')">Lihat Folder Tugas →</button>
+  </div>
+
+  <div class="section">
+    <div class="divider"></div>
+    <p class="section-title">Tentang Aku</p>
+    <p class="section-subtitle">Sekilas tentang Sheira Najwa Azzaliya</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon rose">🌸</div>
+        <h3>Akademik</h3>
+        <p>Mahasiswi aktif yang berdedikasi penuh terhadap pendidikan dan pengembangan diri.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon lav">📚</div>
+        <h3>Belajar</h3>
+        <p>Senang mengeksplorasi berbagai ilmu dan selalu ingin tahu hal-hal baru.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon rose">✨</div>
+        <h3>Kreatif</h3>
+        <p>Menyukai hal-hal estetis dan mengekspresikan diri melalui berbagai cara.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon lav">🎯</div>
+        <h3>Fokus</h3>
+        <p>Berkomitmen untuk mencapai tujuan dengan kerja keras dan konsistensi.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TUGAS PAGE -->
+<div class="page" id="page-tugas">
+  <div class="section">
+    <p class="section-title">📁 Folder Tugas</p>
+    <p class="section-subtitle">Simpan dan kelola semua file tugas Sheira di sini</p>
+
+    <div class="folder-stats">
+      <div class="stat-pill">Total file: <span id="file-count">0</span></div>
+      <div class="stat-pill">Ukuran: <span id="total-size">0 KB</span></div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+      <span style="font-size:13px;color:var(--muted)">Klik tombol untuk upload file tugasmu</span>
+      <label for="file-input" class="upload-btn">+ Upload File</label>
+      <input type="file" id="file-input" multiple onchange="handleFiles(this.files)">
+    </div>
+
+    <div id="file-list-container">
+      <div class="empty-state" id="empty-state">
+        <div class="e-icon">🗂️</div>
+        <p>Belum ada file tugas.<br>Upload file pertamamu sekarang!</p>
+      </div>
+      <div class="file-list" id="file-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- KONTAK PAGE -->
+<div class="page" id="page-kontak">
+  <div class="section">
+    <p class="section-title">Sapa Aku</p>
+    <p class="section-subtitle">Senang terhubung dengan siapa pun yang ingin berkenalan!</p>
+    <div class="contact-card">
+      <h3>Sheira Najwa Azzaliya</h3>
+      <p>Mahasiswi yang terbuka untuk berkenalan, berdiskusi,<br>dan berbagi ilmu bersama. Jangan ragu untuk menyapa! 🌸</p>
+      <div class="social-links">
+        <span class="social-btn">📧 Email</span>
+        <span class="social-btn">📸 Instagram</span>
+        <span class="social-btn">💼 LinkedIn</span>
+      </div>
+    </div>
+
+    <div style="margin-top:28px">
+      <div class="card" style="background:var(--warm);border:none">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <div class="card-icon rose" style="margin:0">💌</div>
+          <div>
+            <h3 style="margin:0 0 3px">Kirim Pesan</h3>
+            <p style="margin:0;font-size:12px;color:var(--muted)">Isi form di bawah untuk menghubungi Sheira langsung</p>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <input type="text" placeholder="Nama kamu...">
+          <input type="email" placeholder="Email kamu...">
+          <textarea placeholder="Pesanmu untuk Sheira..." rows="4"></textarea>
+          <button class="btn-primary" style="align-self:flex-end" onclick="alert('Pesan terkirim! Sheira akan segera membalasmu 🌸')">Kirim Pesan →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>✦ Sheira Najwa Azzaliya · Personal Website ✦</p>
+</footer>
+
+<script>
+  let files = [];
+
+  function showPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    document.getElementById('nav-' + page).classList.add('active');
+  }
+
+  function getFileIcon(name) {
+    const ext = name.split('.').pop().toLowerCase();
+    const icons = {pdf:'📄',doc:'📝',docx:'📝',ppt:'📊',pptx:'📊',xls:'📈',xlsx:'📈',jpg:'🖼️',jpeg:'🖼️',png:'🖼️',gif:'🖼️',mp4:'🎬',mp3:'🎵',zip:'🗜️',rar:'🗜️',txt:'📃'};
+    return icons[ext] || '📁';
+  }
+
+  function formatSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
+    return (bytes/1048576).toFixed(1) + ' MB';
+  }
+
+  function handleFiles(fileList) {
+    for (let f of fileList) {
+      files.push({
+        id: Date.now() + Math.random(),
+        name: f.name,
+        size: f.size,
+        date: new Date().toLocaleDateString('id-ID', {day:'numeric',month:'short',year:'numeric'}),
+        obj: f
+      });
+    }
+    renderFiles();
+  }
+
+  function deleteFile(id) {
+    files = files.filter(f => f.id !== id);
+    renderFiles();
+  }
+
+  function downloadFile(id) {
+    const f = files.find(x => x.id === id);
+    if (!f) return;
+    const url = URL.createObjectURL(f.obj);
+    const a = document.createElement('a');
+    a.href = url; a.download = f.name; a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function renderFiles() {
+    const container = document.getElementById('file-list');
+    const empty = document.getElementById('empty-state');
+    const count = document.getElementById('file-count');
+    const totalSize = document.getElementById('total-size');
+
+    count.textContent = files.length;
+    const total = files.reduce((a,f) => a + f.size, 0);
+    totalSize.textContent = formatSize(total);
+
+    if (files.length === 0) {
+      empty.style.display = 'block';
+      container.innerHTML = '';
+      return;
+    }
+    empty.style.display = 'none';
+    container.innerHTML = files.map(f => `
+      <div class="file-item">
+        <div class="file-icon">${getFileIcon(f.name)}</div>
+        <div class="file-info">
+          <div class="file-name">${f.name}</div>
+          <div class="file-meta">${formatSize(f.size)} · Diunggah ${f.date}</div>
+        </div>
+        <div class="file-actions">
+          <button class="btn-sm" onclick="downloadFile(${f.id})">Unduh</button>
+          <button class="btn-sm del" onclick="deleteFile(${f.id})">Hapus</button>
+        </div>
+      </div>
+    `).join('');
+  }
+</script>
+</body>
+</html>
