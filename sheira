@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sheira Najwa Azzaliya — Personal Website</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --rose:#f4c5cc;--rose-light:#fdf0f2;--rose-mid:#e8929e;--rose-dark:#b05a6a;
+    --lavender:#e4daf4;--lav-mid:#9b85c8;--lav-dark:#6a4f9e;
+    --cream:#fdfaf7;--warm:#f7f0e8;--text:#3a2a30;--muted:#8c7580;
+    --white:#ffffff;--border:#f0e8ea;
+  }
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+  /* NAV */
+  .nav{background:rgba(253,240,242,0.95);backdrop-filter:blur(8px);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+  .nav-brand{font-family:'Playfair Display',serif;font-size:18px;color:var(--rose-dark);letter-spacing:0.5px}
+  .nav-links{display:flex;gap:4px;align-items:center}
+  .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:0.3px;cursor:pointer;padding:6px 14px;border-radius:999px;transition:all 0.2s;border:none;background:none;font-family:'DM Sans',sans-serif}
+  .nav-links a:hover,.nav-links a.active{background:var(--rose-light);color:var(--rose-dark)}
+  .nav-actions{display:flex;gap:8px;align-items:center}
+
+  /* BUTTONS */
+  .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 22px;border-radius:999px;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;border:none;text-decoration:none;transition:all 0.2s}
+  .btn-primary{background:var(--rose-dark);color:white}
+  .btn-primary:hover{background:#8e3f52;transform:translateY(-1px);box-shadow:0 6px 18px rgba(176,90,106,0.25)}
+  .btn-outline{background:transparent;border:1.5px solid var(--rose-dark);color:var(--rose-dark)}
+  .btn-outline:hover{background:var(--rose-dark);color:white}
+  .btn-sm{padding:6px 14px;font-size:12px}
+  .btn-danger{background:#ffeaea;color:#c0392b;border:1px solid #ffb3b3}
+  .btn-danger:hover{background:#c0392b;color:white}
+  .btn-success{background:#e8f8f0;color:#1a7a4a;border:1px solid #a8e8c8}
+  .btn-success:hover{background:#1a7a4a;color:white}
+
+  /* PAGES */
+  .page{display:none;animation:fadeIn 0.35s ease}
+  .page.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ===================== HOME ===================== */
+  .hero{padding:60px 32px 48px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative}
+  .hero::before{content:'';position:absolute;top:0;left:0;right:0;height:320px;background:linear-gradient(160deg,#fdf0f2 0%,#f0eafa 60%,var(--cream) 100%);z-index:0}
+  .hero>*{position:relative;z-index:1}
+  .avatar{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--lavender));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:36px;color:#fff;margin-bottom:20px;border:4px solid white;box-shadow:0 4px 20px rgba(176,90,106,0.15);overflow:hidden;cursor:pointer}
+  .avatar img{width:100%;height:100%;object-fit:cover}
+  .hero h1{font-family:'Playfair Display',serif;font-size:32px;font-weight:400;color:var(--text);line-height:1.2;margin-bottom:6px}
+  .hero h1 em{color:var(--rose-dark);font-style:italic}
+  .hero-sub{font-size:14px;color:var(--muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:20px}
+  .hero-bio{font-size:15px;color:var(--muted);max-width:420px;line-height:1.8;margin-bottom:28px}
+  .hero-tags{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:32px}
+  .tag{background:var(--rose-light);border:1px solid var(--rose);border-radius:999px;padding:5px 14px;font-size:12px;color:var(--rose-dark)}
+  .tag.lav{background:#f0eafa;border-color:var(--lavender);color:var(--lav-dark)}
+
+  .section{padding:40px 32px;max-width:700px;margin:0 auto}
+  .section-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--text);margin-bottom:4px}
+  .section-subtitle{font-size:13px;color:var(--muted);margin-bottom:28px}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--rose),transparent);margin:8px 0 36px}
+
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+  .card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:20px;transition:all 0.2s}
+  .card:hover{box-shadow:0 6px 24px rgba(176,90,106,0.1);transform:translateY(-2px)}
+  .card-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:18px}
+  .card-icon.rose{background:var(--rose-light)}.card-icon.lav{background:#f0eafa}
+  .card h3{font-size:14px;font-weight:500;margin-bottom:6px;color:var(--text)}.card p{font-size:12px;color:var(--muted);line-height:1.6}
+
+  /* ===================== AUTH ===================== */
+  .auth-wrap{min-height:calc(100vh - 62px);display:flex;align-items:center;justify-content:center;padding:40px 20px;background:linear-gradient(160deg,#fdf0f2,#f0eafa,var(--cream))}
+  .auth-card{background:var(--white);border:1px solid var(--border);border-radius:24px;padding:36px;width:100%;max-width:400px;box-shadow:0 16px 48px rgba(176,90,106,0.12)}
+  .auth-logo{text-align:center;margin-bottom:24px}
+  .auth-logo h2{font-family:'Playfair Display',serif;font-size:26px;color:var(--rose-dark)}
+  .auth-logo p{font-size:13px;color:var(--muted);margin-top:4px}
+  .auth-err{background:#ffeaea;color:#c0392b;border:1px solid #ffb3b3;border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:14px;display:none}
+  .auth-switch{text-align:center;font-size:13px;color:var(--muted);margin-top:16px}
+  .auth-switch a{color:var(--rose-dark);cursor:pointer;font-weight:500;text-decoration:none}
+  .form-group{margin-bottom:14px}
+  .form-label{display:block;font-size:13px;font-weight:500;margin-bottom:5px;color:var(--text)}
+  .form-control{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);outline:none;transition:all 0.2s}
+  .form-control:focus{border-color:var(--rose-mid);background:var(--white)}
+  textarea.form-control{resize:vertical;min-height:90px}
+
+  /* ===================== DASHBOARD ===================== */
+  .dash-wrap{display:flex;min-height:calc(100vh - 62px)}
+  .sidebar{width:220px;background:var(--white);border-right:1px solid var(--border);padding:20px 12px;display:flex;flex-direction:column;gap:2px;flex-shrink:0}
+  .sb-profile{text-align:center;padding:12px 8px 18px;border-bottom:1px solid var(--border);margin-bottom:10px}
+  .sb-avatar{width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--lavender));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin:0 auto 8px;border:3px solid white;box-shadow:0 4px 12px rgba(176,90,106,0.15);overflow:hidden;cursor:pointer}
+  .sb-avatar img{width:100%;height:100%;object-fit:cover}
+  .sb-name{font-size:13px;font-weight:500;color:var(--text)}
+  .sb-role{font-size:11px;color:var(--muted)}
+  .sb-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:10px 10px 4px}
+  .sb-link{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:10px;font-size:13px;color:var(--muted);cursor:pointer;transition:all 0.2s;border:none;background:none;width:100%;font-family:'DM Sans',sans-serif;text-align:left}
+  .sb-link:hover,.sb-link.active{background:var(--rose-light);color:var(--rose-dark)}
+  .sb-link .si{font-size:16px;width:20px;text-align:center}
+  .dash-main{flex:1;padding:28px;overflow-y:auto}
+  .dash-head{margin-bottom:24px}
+  .dash-head h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:400}
+  .dash-head p{font-size:13px;color:var(--muted);margin-top:3px}
+  .stats-row{display:flex;gap:14px;margin-bottom:24px;flex-wrap:wrap}
+  .stat-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;min-width:140px}
+  .sc-icon{font-size:24px}
+  .sc-num{font-size:22px;font-weight:600;color:var(--text);line-height:1}
+  .sc-label{font-size:11px;color:var(--muted)}
+
+  /* ===================== TUGAS ===================== */
+  .folder-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+  .folder-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:20px 14px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative}
+  .folder-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(176,90,106,0.12);border-color:var(--rose)}
+  .fc-emoji{font-size:32px;margin-bottom:8px;display:block}
+  .fc-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px}
+  .fc-count{font-size:11px;color:var(--muted)}
+  .fc-btns{position:absolute;top:8px;right:8px;display:flex;gap:3px;opacity:0;transition:opacity 0.2s}
+  .folder-card:hover .fc-btns{opacity:1}
+  .fc-btn{background:none;border:none;font-size:13px;cursor:pointer;padding:3px;border-radius:6px;color:var(--muted);transition:all 0.2s}
+  .fc-btn:hover{background:var(--rose-light);color:var(--rose-dark)}
+  .add-folder{background:var(--rose-light);border:2px dashed var(--rose);border-radius:18px;padding:20px 14px;text-align:center;cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:116px}
+  .add-folder:hover{background:var(--rose);border-color:var(--rose-dark)}
+  .add-folder:hover *{color:white!important}
+  .add-folder-plus{font-size:26px;color:var(--rose-dark)}
+  .add-folder-lbl{font-size:12px;color:var(--rose-dark)}
+
+  /* FILE LIST */
+  .file-box{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:22px}
+  .file-box-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+  .file-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--cream);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;transition:all 0.2s}
+  .file-item:hover{box-shadow:0 4px 14px rgba(176,90,106,0.08)}
+  .fi-icon{width:36px;height:36px;border-radius:10px;background:var(--rose-light);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  .fi-info{flex:1;min-width:0}
+  .fi-name{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .fi-meta{font-size:11px;color:var(--muted);margin-top:2px}
+  .fi-actions{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
+  .badge{display:inline-block;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:500}
+  .badge-ok{background:#e8f8f0;color:#1a7a4a}
+  .badge-pending{background:#fff8e8;color:#a07800}
+  .empty{text-align:center;padding:40px 20px;color:var(--muted)}
+  .empty .ei{font-size:38px;margin-bottom:10px;opacity:0.4}
+  .empty p{font-size:13px;line-height:1.6}
+
+  /* PROFILE */
+  .profile-grid{display:grid;grid-template-columns:190px 1fr;gap:22px;max-width:660px}
+  .profile-photo-box{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:24px;text-align:center}
+  .profile-av{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--lavender));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:30px;color:#fff;margin:0 auto 12px;border:3px solid white;box-shadow:0 4px 16px rgba(176,90,106,0.15);cursor:pointer;overflow:hidden;position:relative;transition:all 0.2s}
+  .profile-av:hover{opacity:0.85}
+  .profile-av img{width:100%;height:100%;object-fit:cover}
+  .profile-form-box{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:24px}
+
+  /* KONTAK */
+  .contact-card{background:linear-gradient(135deg,#fdf0f2,#f0eafa);border:1px solid var(--rose);border-radius:20px;padding:28px;text-align:center}
+  .contact-card h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;margin-bottom:8px}
+  .contact-card p{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7}
+  .social-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+  .social-btn{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:999px;padding:8px 18px;font-size:13px;color:var(--text);cursor:pointer;transition:all 0.2s}
+  .social-btn:hover{background:var(--rose-dark);color:white}
+
+  /* MODAL */
+  .modal-bg{display:none;position:fixed;inset:0;z-index:999;background:rgba(58,42,48,0.35);backdrop-filter:blur(4px);align-items:center;justify-content:center}
+  .modal-bg.show{display:flex}
+  .modal-box{background:var(--white);border-radius:22px;padding:28px;width:90%;max-width:420px;box-shadow:0 20px 56px rgba(0,0,0,0.15);animation:fadeIn 0.25s ease}
+  .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+  .modal-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:400}
+  .modal-close{background:none;border:none;font-size:18px;cursor:pointer;color:var(--muted);padding:4px;border-radius:8px}
+  .modal-close:hover{background:var(--rose-light);color:var(--rose-dark)}
+
+  /* UPLOAD */
+  .upload-drop{border:2px dashed var(--rose);border-radius:14px;padding:28px;text-align:center;cursor:pointer;transition:all 0.2s;background:var(--rose-light)}
+  .upload-drop:hover{background:var(--rose)}
+  .upload-drop:hover p{color:white}
+  .ud-icon{font-size:32px;margin-bottom:8px}
+  .upload-drop p{font-size:13px;color:var(--rose-dark)}
+  .upload-drop small{font-size:11px;color:var(--muted)}
+
+  /* NOTIF */
+  .notif{position:fixed;top:72px;right:20px;z-index:9999;padding:12px 18px;border-radius:12px;font-size:13px;display:flex;align-items:center;gap:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);animation:fadeIn 0.3s ease;min-width:260px;max-width:360px}
+  .notif-success{background:#e8f8f0;color:#1a7a4a;border:1px solid #a8e8c8}
+  .notif-error{background:#ffeaea;color:#c0392b;border:1px solid #ffb3b3}
+
+  footer{text-align:center;padding:22px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);background:var(--white)}
+
+  @media(max-width:640px){
+    .nav{padding:12px 16px}.section{padding:30px 16px}.hero{padding:48px 16px 36px}
+    .dash-wrap{flex-direction:column}.sidebar{width:100%;flex-direction:row;overflow-x:auto;padding:8px 12px;gap:4px}
+    .sb-profile{display:none}.sb-label{display:none}.dash-main{padding:16px}
+    .profile-grid{grid-template-columns:1fr}.stats-row{gap:10px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <span class="nav-brand" style="cursor:pointer" onclick="showPage('home')">Sheira Najwa ✦</span>
+  <div class="nav-links">
+    <a id="nl-home" class="active" onclick="showPage('home')">Beranda</a>
+    <a id="nl-tugas" onclick="goTugas()">Tugas</a>
+    <a id="nl-kontak" onclick="showPage('kontak')">Kontak</a>
+  </div>
+  <div class="nav-actions" id="navActions">
+    <button class="btn btn-outline btn-sm" onclick="showPage('login')">Login</button>
+  </div>
+</nav>
+
+<!-- ========== HOME ========== -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="avatar" id="heroAvatar" title="Klik untuk ganti foto" onclick="if(currentUser)document.getElementById('heroPhotoInput').click()">SN</div>
+    <input type="file" id="heroPhotoInput" accept="image/*" style="display:none" onchange="changePhoto(this)">
+    <p class="hero-sub">Personal Website</p>
+    <h1>Halo, aku <em>Sheira</em> 👋</h1>
+    <p class="hero-bio" id="heroBio">Sheira Najwa Azzaliya — seorang mahasiswi yang penuh semangat, suka belajar hal baru, dan percaya bahwa setiap hari adalah kesempatan untuk berkembang.</p>
+    <div class="hero-tags">
+      <span class="tag">✦ Mahasiswi</span>
+      <span class="tag lav">✦ Pelajar</span>
+      <span class="tag">✦ Kreatif</span>
+      <span class="tag lav">✦ Semangat Belajar</span>
+    </div>
+    <button class="btn btn-primary" onclick="goTugas()">Lihat Folder Tugas →</button>
+  </div>
+
+  <div class="section">
+    <div class="divider"></div>
+    <p class="section-title">Tentang Aku</p>
+    <p class="section-subtitle">Sekilas tentang Sheira Najwa Azzaliya</p>
+    <div class="card-grid">
+      <div class="card"><div class="card-icon rose">🌸</div><h3>Akademik</h3><p>Mahasiswi aktif yang berdedikasi penuh terhadap pendidikan dan pengembangan diri.</p></div>
+      <div class="card"><div class="card-icon lav">📚</div><h3>Belajar</h3><p>Senang mengeksplorasi berbagai ilmu dan selalu ingin tahu hal-hal baru.</p></div>
+      <div class="card"><div class="card-icon rose">✨</div><h3>Kreatif</h3><p>Menyukai hal-hal estetis dan mengekspresikan diri melalui berbagai cara.</p></div>
+      <div class="card"><div class="card-icon lav">🎯</div><h3>Fokus</h3><p>Berkomitmen untuk mencapai tujuan dengan kerja keras dan konsistensi.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== LOGIN ========== -->
+<div class="page" id="page-login">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <h2>Sheira Najwa ✦</h2>
+        <p>Masuk ke akunmu</p>
+      </div>
+      <div class="auth-err" id="loginErr"></div>
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input type="text" class="form-control" id="loginUser" placeholder="Masukkan username..." onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" id="loginPass" placeholder="Masukkan password..." onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:4px" onclick="doLogin()">🌸 Masuk</button>
+      <div class="auth-switch">Belum punya akun? <a onclick="showPage('register')">Daftar sekarang</a></div>
+      <div class="auth-switch" style="margin-top:8px"><a onclick="showPage('home')" style="color:var(--muted)">← Kembali ke Beranda</a></div>
+      <div style="margin-top:16px;padding:12px;background:var(--rose-light);border-radius:10px;font-size:12px;color:var(--muted);text-align:center">
+        <b style="color:var(--rose-dark)">Akun default:</b> username <b>sheira</b> · password <b>sheira123</b>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== REGISTER ========== -->
+<div class="page" id="page-register">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <h2>Sheira Najwa ✦</h2>
+        <p>Buat akun baru</p>
+      </div>
+      <div class="auth-err" id="regErr"></div>
+      <div class="form-group"><label class="form-label">Nama Lengkap</label><input type="text" class="form-control" id="regName" placeholder="Nama lengkap..."></div>
+      <div class="form-group"><label class="form-label">Username</label><input type="text" class="form-control" id="regUser" placeholder="Username unik..."></div>
+      <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-control" id="regPass" placeholder="Min. 6 karakter..."></div>
+      <div class="form-group"><label class="form-label">Konfirmasi Password</label><input type="password" class="form-control" id="regPass2" placeholder="Ulangi password..." onkeydown="if(event.key==='Enter')doRegister()"></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:4px" onclick="doRegister()">✨ Daftar</button>
+      <div class="auth-switch">Sudah punya akun? <a onclick="showPage('login')">Login sekarang</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== DASHBOARD ========== -->
+<div class="page" id="page-dashboard">
+  <div class="dash-wrap">
+    <aside class="sidebar">
+      <div class="sb-profile">
+        <div class="sb-avatar" id="sbAvatar" onclick="showDash('profile')" title="Edit foto">SN</div>
+        <div class="sb-name" id="sbName">Sheira</div>
+        <div class="sb-role">Mahasiswi</div>
+      </div>
+      <span class="sb-label">Menu</span>
+      <button class="sb-link active" id="sl-overview" onclick="showDash('overview')"><span class="si">🏠</span> Beranda</button>
+      <button class="sb-link" id="sl-tugas" onclick="showDash('tugas')"><span class="si">📁</span> Folder Tugas</button>
+      <button class="sb-link" id="sl-profile" onclick="showDash('profile')"><span class="si">👤</span> Edit Profil</button>
+      <div style="margin-top:auto;padding-top:16px;border-top:1px solid var(--border)">
+        <button class="sb-link" onclick="doLogout()" style="color:#c0392b"><span class="si">🚪</span> Logout</button>
+      </div>
+    </aside>
+    <main class="dash-main">
+
+      <!-- OVERVIEW -->
+      <div id="dash-overview">
+        <div class="dash-head">
+          <h2 id="dashWelcome">Selamat datang! 🌸</h2>
+          <p>Kelola profil dan tugas-tugasmu di sini.</p>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card"><span class="sc-icon">📁</span><div><div class="sc-num" id="stFolders">0</div><div class="sc-label">Folder</div></div></div>
+          <div class="stat-card"><span class="sc-icon">📄</span><div><div class="sc-num" id="stFiles">0</div><div class="sc-label">Total File</div></div></div>
+          <div class="stat-card"><span class="sc-icon">✅</span><div><div class="sc-num" id="stDone">0</div><div class="sc-label">Dikumpulkan</div></div></div>
+        </div>
+        <div class="card-grid" style="max-width:420px">
+          <div class="card" style="cursor:pointer" onclick="showDash('tugas')"><div class="card-icon rose">🗂️</div><h3>Folder Tugas</h3><p>Kelola & upload file tugas</p></div>
+          <div class="card" style="cursor:pointer" onclick="showDash('profile')"><div class="card-icon lav">✏️</div><h3>Edit Profil</h3><p>Ubah nama, bio, foto</p></div>
+        </div>
+      </div>
+
+      <!-- TUGAS -->
+      <div id="dash-tugas" style="display:none">
+        <!-- VIEW FOLDER -->
+        <div id="vFolders">
+          <div class="dash-head" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px">
+            <div><h2>Folder Tugas 📁</h2><p>Klik folder untuk upload & lihat file</p></div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('mAddFolder')">＋ Tambah Folder</button>
+          </div>
+          <div class="folder-grid" id="folderGrid"></div>
+        </div>
+        <!-- VIEW FILE -->
+        <div id="vFiles" style="display:none">
+          <div class="dash-head" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px">
+            <div>
+              <button class="btn btn-outline btn-sm" onclick="backToFolders()" style="margin-bottom:10px">← Semua Folder</button>
+              <h2 id="vFolderTitle">📂 Tugas 1</h2>
+              <p id="vFolderMeta" style="font-size:13px;color:var(--muted)">0 file</p>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('mUpload')">📤 Upload File</button>
+          </div>
+          <div class="file-box">
+            <div class="empty" id="fileEmpty"><div class="ei">🗂️</div><p>Belum ada file.<br>Upload file tugasmu!</p></div>
+            <div id="fileList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFILE -->
+      <div id="dash-profile" style="display:none">
+        <div class="dash-head"><h2>Edit Profil</h2><p>Ubah nama, bio, dan foto profilmu</p></div>
+        <div class="profile-grid">
+          <div class="profile-photo-box">
+            <div class="profile-av" id="profileAv" onclick="document.getElementById('photoInput').click()" title="Klik untuk ganti foto">SN</div>
+            <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="changePhoto(this)">
+            <p style="font-size:12px;color:var(--muted);margin-top:8px">Klik foto untuk ganti 📷</p>
+            <p style="font-size:11px;color:var(--muted)">Format: JPG, PNG (Max 2MB)</p>
+          </div>
+          <div class="profile-form-box">
+            <div class="form-group"><label class="form-label">Nama Lengkap</label><input type="text" class="form-control" id="editName" placeholder="Nama lengkap..."></div>
+            <div class="form-group"><label class="form-label">Username</label><input type="text" class="form-control" id="editUser" placeholder="Username..."></div>
+            <div class="form-group"><label class="form-label">Bio</label><textarea class="form-control" id="editBio" rows="4" placeholder="Ceritakan tentang dirimu..."></textarea></div>
+            <div class="form-group"><label class="form-label">Ganti Password <span style="color:var(--muted);font-weight:400">(kosongkan jika tidak mau ganti)</span></label><input type="password" class="form-control" id="editPass" placeholder="Password baru..."></div>
+            <button class="btn btn-primary" onclick="saveProfile()">💾 Simpan Perubahan</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ========== KONTAK ========== -->
+<div class="page" id="page-kontak">
+  <div class="section">
+    <p class="section-title">Sapa Aku</p>
+    <p class="section-subtitle">Senang terhubung dengan siapa pun yang ingin berkenalan!</p>
+    <div class="contact-card">
+      <h3>Sheira Najwa Azzaliya</h3>
+      <p>Mahasiswi yang terbuka untuk berkenalan, berdiskusi,<br>dan berbagi ilmu bersama. Jangan ragu untuk menyapa! 🌸</p>
+      <div class="social-links">
+        <a href="mailto:najwaazzaliyaa@gmail.com" class="social-btn">📧 najwaazzaliyaa@gmail.com</a>
+        <a href="https://instagram.com/sheaeazl" target="_blank" class="social-btn">📸 @sheaeazl</a>
+      </div>
+    </div>
+    <div style="margin-top:24px;background:var(--warm);border-radius:16px;padding:24px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+        <div class="card-icon rose" style="margin:0">💌</div>
+        <div><h3 style="font-size:15px;margin:0 0 2px">Kirim Pesan</h3><p style="font-size:12px;color:var(--muted);margin:0">Isi form untuk menghubungi Sheira</p></div>
+      </div>
+      <div class="form-group"><input type="text" class="form-control" placeholder="Nama kamu..."></div>
+      <div class="form-group"><input type="email" class="form-control" placeholder="Email kamu..."></div>
+      <div class="form-group"><textarea class="form-control" placeholder="Pesanmu untuk Sheira..."></textarea></div>
+      <button class="btn btn-primary" onclick="showNotif('Pesan terkirim! Sheira akan segera membalasmu 🌸','success')">Kirim Pesan →</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: TAMBAH FOLDER -->
+<div class="modal-bg" id="mAddFolder">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span class="modal-title">Tambah Folder Tugas</span>
+      <button class="modal-close" onclick="closeModal('mAddFolder')">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Nama Folder</label>
+      <input type="text" class="form-control" id="newFolderName" placeholder="contoh: Tugas 4, Praktikum CSS..." onkeydown="if(event.key==='Enter')addFolder()">
+    </div>
+    <div style="display:flex;gap:10px;margin-top:4px">
+      <button class="btn btn-outline" onclick="closeModal('mAddFolder')" style="flex:1">Batal</button>
+      <button class="btn btn-primary" onclick="addFolder()" style="flex:1">＋ Buat Folder</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: EDIT FOLDER -->
+<div class="modal-bg" id="mEditFolder">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span class="modal-title">Edit Nama Folder</span>
+      <button class="modal-close" onclick="closeModal('mEditFolder')">✕</button>
+    </div>
+    <input type="hidden" id="editFolderId">
+    <div class="form-group">
+      <label class="form-label">Nama Baru</label>
+      <input type="text" class="form-control" id="editFolderName" onkeydown="if(event.key==='Enter')saveEditFolder()">
+    </div>
+    <div style="display:flex;gap:10px;margin-top:4px">
+      <button class="btn btn-outline" onclick="closeModal('mEditFolder')" style="flex:1">Batal</button>
+      <button class="btn btn-primary" onclick="saveEditFolder()" style="flex:1">💾 Simpan</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: UPLOAD FILE -->
+<div class="modal-bg" id="mUpload">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span class="modal-title">Upload File Tugas</span>
+      <button class="modal-close" onclick="closeModal('mUpload')">✕</button>
+    </div>
+    <label class="upload-drop" for="fileInput" style="display:block">
+      <div class="ud-icon">📤</div>
+      <p>Klik untuk pilih file</p>
+      <small>HTML, CSS, JS, PDF, DOCX, ZIP, JPG, PNG (Max 10MB)</small>
+    </label>
+    <input type="file" id="fileInput" style="display:none" multiple accept=".html,.css,.js,.pdf,.doc,.docx,.zip,.rar,.jpg,.jpeg,.png,.txt" onchange="uploadFiles(this.files)">
+    <p id="uploadStatus" style="font-size:12px;color:var(--muted);margin-top:10px;text-align:center;min-height:16px"></p>
+  </div>
+</div>
+
+<footer><p>✦ Sheira Najwa Azzaliya · Personal Website ✦</p></footer>
+
+<script>
+// ======================================================
+// DATA & STATE
+// ======================================================
+let currentUser = null;
+let openFolderId = null;
+
+const DEFAULT_ACCOUNTS = [
+  { username:'sheira', password:'sheira123', name:'Sheira Najwa Azzaliya', bio:'Mahasiswi yang penuh semangat, suka belajar hal baru ✨', photo:null }
+];
+
+function getAccounts(){ const s=localStorage.getItem('sn_accs'); return s?JSON.parse(s):JSON.parse(JSON.stringify(DEFAULT_ACCOUNTS)); }
+function saveAccounts(a){ localStorage.setItem('sn_accs',JSON.stringify(a)); }
+function getFolders(u){ const s=localStorage.getItem('sn_f_'+u); if(s)return JSON.parse(s); return [{id:1,name:'Tugas 1',files:[]},{id:2,name:'Tugas 2',files:[]},{id:3,name:'Tugas 3',files:[]}]; }
+function saveFolders(u,f){ localStorage.setItem('sn_f_'+u,JSON.stringify(f)); }
+function nextId(arr){ return arr.length?Math.max(...arr.map(x=>x.id))+1:1; }
+
+// ======================================================
+// NAVIGATION
+// ======================================================
+function showPage(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  const nl=document.getElementById('nl-'+p);
+  if(nl)nl.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function goTugas(){
+  if(currentUser){ showPage('dashboard'); showDash('tugas'); }
+  else { sessionStorage.setItem('dest','tugas'); showPage('login'); }
+}
+
+// ======================================================
+// AUTH
+// ======================================================
+function doLogin(){
+  const u=document.getElementById('loginUser').value.trim();
+  const p=document.getElementById('loginPass').value;
+  const err=document.getElementById('loginErr');
+  if(!u||!p){showErr(err,'Username dan password wajib diisi!');return;}
+  const accs=getAccounts();
+  const found=accs.find(a=>a.username===u&&a.password===p);
+  if(!found){showErr(err,'Username atau password salah!');return;}
+  currentUser={...found};
+  err.style.display='none';
+  document.getElementById('loginUser').value='';
+  document.getElementById('loginPass').value='';
+  updateNav();
+  updateStats();
+  const dest=sessionStorage.getItem('dest')||'overview';
+  sessionStorage.removeItem('dest');
+  showPage('dashboard');
+  showDash(dest==='tugas'?'tugas':'overview');
+  showNotif('Selamat datang, '+currentUser.name.split(' ')[0]+'! 🌸','success');
+}
+
+function doRegister(){
+  const name=document.getElementById('regName').value.trim();
+  const u=document.getElementById('regUser').value.trim();
+  const p=document.getElementById('regPass').value;
+  const p2=document.getElementById('regPass2').value;
+  const err=document.getElementById('regErr');
+  if(!name||!u||!p){showErr(err,'Semua field wajib diisi!');return;}
+  if(p.length<6){showErr(err,'Password minimal 6 karakter!');return;}
+  if(p!==p2){showErr(err,'Konfirmasi password tidak cocok!');return;}
+  const accs=getAccounts();
+  if(accs.find(a=>a.username===u)){showErr(err,'Username sudah digunakan!');return;}
+  accs.push({username:u,password:p,name,bio:'',photo:null});
+  saveAccounts(accs);
+  err.style.display='none';
+  ['regName','regUser','regPass','regPass2'].forEach(id=>document.getElementById(id).value='');
+  showNotif('Akun berhasil dibuat! Silakan login 🌸','success');
+  showPage('login');
+}
+
+function doLogout(){
+  currentUser=null; openFolderId=null;
+  updateNav();
+  showPage('home');
+  showNotif('Berhasil logout. Sampai jumpa! 👋','success');
+}
+
+function showErr(el,msg){ el.textContent='❌ '+msg; el.style.display='block'; }
+
+// ======================================================
+// NAVBAR
+// ======================================================
+function updateNav(){
+  const na=document.getElementById('navActions');
+  if(currentUser){
+    na.innerHTML=`<span style="font-size:13px;color:var(--muted)">Halo, <b style="color:var(--rose-dark)">${currentUser.name.split(' ')[0]}</b></span>
+      <button class="btn btn-outline btn-sm" onclick="showPage('dashboard');showDash('overview')">Dashboard</button>
+      <button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button>`;
+  } else {
+    na.innerHTML=`<button class="btn btn-outline btn-sm" onclick="showPage('login')">Login</button>`;
+  }
+}
+
+// ======================================================
+// DASHBOARD
+// ======================================================
+function showDash(s){
+  ['overview','tugas','profile'].forEach(x=>{
+    document.getElementById('dash-'+x).style.display=x===s?'block':'none';
+    const sl=document.getElementById('sl-'+x);
+    if(sl)sl.classList.toggle('active',x===s);
+  });
+  if(s==='tugas')renderFolders();
+  if(s==='profile')loadProfile();
+}
+
+function updateStats(){
+  if(!currentUser)return;
+  document.getElementById('dashWelcome').textContent='Selamat datang, '+currentUser.name.split(' ')[0]+'! 🌸';
+  document.getElementById('sbName').textContent=currentUser.name.split(' ')[0];
+  const folders=getFolders(currentUser.username);
+  let tf=0,td=0;
+  folders.forEach(f=>{tf+=f.files.length;td+=f.files.filter(x=>x.status==='done').length;});
+  document.getElementById('stFolders').textContent=folders.length;
+  document.getElementById('stFiles').textContent=tf;
+  document.getElementById('stDone').textContent=td;
+  refreshAvatars();
+}
+
+function refreshAvatars(){
+  if(!currentUser)return;
+  const init=currentUser.name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+  const html=currentUser.photo?`<img src="${currentUser.photo}" alt="">`  :init;
+  ['heroAvatar','sbAvatar','profileAv'].forEach(id=>{
+    const el=document.getElementById(id); if(el)el.innerHTML=html;
+  });
+}
+
+// ======================================================
+// FOLDERS
+// ======================================================
+function renderFolders(){
+  if(!currentUser)return;
+  const folders=getFolders(currentUser.username);
+  document.getElementById('folderGrid').innerHTML=folders.map(f=>`
+    <div class="folder-card" onclick="openFolder(${f.id})">
+      <div class="fc-btns">
+        <button class="fc-btn" onclick="event.stopPropagation();startEdit(${f.id},'${f.name.replace(/'/g,"\\'")}')">✏️</button>
+        <button class="fc-btn" onclick="event.stopPropagation();delFolder(${f.id})">🗑️</button>
+      </div>
+      <span class="fc-emoji">🗂️</span>
+      <div class="fc-name">${f.name}</div>
+      <div class="fc-count">${f.files.length} file</div>
+    </div>
+  `).join('')+`
+    <div class="add-folder" onclick="openModal('mAddFolder')">
+      <span class="add-folder-plus">＋</span>
+      <span class="add-folder-lbl">Tambah Folder</span>
+    </div>`;
+  document.getElementById('newFolderName').placeholder='contoh: Tugas '+(folders.length+1);
+}
+
+function addFolder(){
+  const name=document.getElementById('newFolderName').value.trim();
+  if(!name){showNotif('Nama folder tidak boleh kosong!','error');return;}
+  const folders=getFolders(currentUser.username);
+  folders.push({id:nextId(folders),name,files:[]});
+  saveFolders(currentUser.username,folders);
+  document.getElementById('newFolderName').value='';
+  closeModal('mAddFolder');
+  renderFolders(); updateStats();
+  showNotif('Folder "'+name+'" berhasil dibuat! 🎉','success');
+}
+
+function delFolder(id){
+  if(!confirm('Hapus folder ini beserta semua filenya?'))return;
+  let f=getFolders(currentUser.username).filter(x=>x.id!==id);
+  saveFolders(currentUser.username,f);
+  renderFolders(); updateStats();
+  showNotif('Folder berhasil dihapus!','success');
+}
+
+function startEdit(id,name){
+  document.getElementById('editFolderId').value=id;
+  document.getElementById('editFolderName').value=name;
+  openModal('mEditFolder');
+}
+
+function saveEditFolder(){
+  const id=parseInt(document.getElementById('editFolderId').value);
+  const name=document.getElementById('editFolderName').value.trim();
+  if(!name)return;
+  const folders=getFolders(currentUser.username);
+  const f=folders.find(x=>x.id===id); if(f)f.name=name;
+  saveFolders(currentUser.username,folders);
+  closeModal('mEditFolder'); renderFolders();
+  showNotif('Nama folder berhasil diubah!','success');
+}
+
+// ======================================================
+// FILES
+// ======================================================
+function openFolder(id){
+  openFolderId=id;
+  const folder=getFolders(currentUser.username).find(f=>f.id===id);
+  if(!folder)return;
+  document.getElementById('vFolderTitle').textContent='📂 '+folder.name;
+  document.getElementById('vFolders').style.display='none';
+  document.getElementById('vFiles').style.display='block';
+  renderFiles();
+}
+
+function backToFolders(){
+  openFolderId=null;
+  document.getElementById('vFolders').style.display='block';
+  document.getElementById('vFiles').style.display='none';
+  renderFolders();
+}
+
+function renderFiles(){
+  const folder=getFolders(currentUser.username).find(f=>f.id===openFolderId);
+  if(!folder)return;
+  document.getElementById('vFolderMeta').textContent=folder.files.length+' file';
+  const list=document.getElementById('fileList');
+  const empty=document.getElementById('fileEmpty');
+  if(!folder.files.length){empty.style.display='block';list.innerHTML='';return;}
+  empty.style.display='none';
+  list.innerHTML=folder.files.map(f=>`
+    <div class="file-item">
+      <div class="fi-icon">${fileIcon(f.ext)}</div>
+      <div class="fi-info">
+        <div class="fi-name">${f.name}</div>
+        <div class="fi-meta">${fmtSize(f.size)} · ${f.date}</div>
+      </div>
+      <div class="fi-actions">
+        <span class="badge ${f.status==='done'?'badge-ok':'badge-pending'}">${f.status==='done'?'✅ Dikumpulkan':'⏳ Belum'}</span>
+        ${f.status!=='done'?`<button class="btn btn-success btn-sm" onclick="collectFile('${f.id}')">Kumpulkan</button>`:''}
+        <button class="btn btn-danger btn-sm" onclick="delFile('${f.id}')">🗑️</button>
+      </div>
+    </div>
+  `).join('');
+  updateStats();
+}
+
+function uploadFiles(files){
+  if(!files||!files.length)return;
+  const allowed=['html','css','js','pdf','doc','docx','zip','rar','jpg','jpeg','png','txt'];
+  const folders=getFolders(currentUser.username);
+  const folder=folders.find(f=>f.id===openFolderId);
+  if(!folder)return;
+  let ok=0,skip=0;
+  Array.from(files).forEach(file=>{
+    const ext=file.name.split('.').pop().toLowerCase();
+    if(!allowed.includes(ext)||file.size>10*1024*1024){skip++;return;}
+    folder.files.push({
+      id:Date.now()+'_'+Math.random().toString(36).slice(2,6),
+      name:file.name, ext, size:file.size,
+      date:new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'}),
+      status:'not_done'
+    });
+    ok++;
+  });
+  saveFolders(currentUser.username,folders);
+  closeModal('mUpload');
+  document.getElementById('fileInput').value='';
+  renderFiles();
+  if(ok)showNotif(ok+' file berhasil diupload! 🎉','success');
+  if(skip)showNotif(skip+' file dilewati (tipe/ukuran tidak valid)','error');
+}
+
+function collectFile(id){
+  const folders=getFolders(currentUser.username);
+  const folder=folders.find(f=>f.id===openFolderId);
+  const file=folder&&folder.files.find(f=>f.id===id);
+  if(file)file.status='done';
+  saveFolders(currentUser.username,folders);
+  renderFiles();
+  showNotif('Tugas berhasil dikumpulkan! ✅','success');
+}
+
+function delFile(id){
+  if(!confirm('Hapus file ini?'))return;
+  const folders=getFolders(currentUser.username);
+  const folder=folders.find(f=>f.id===openFolderId);
+  if(folder)folder.files=folder.files.filter(f=>f.id!==id);
+  saveFolders(currentUser.username,folders);
+  renderFiles();
+  showNotif('File berhasil dihapus!','success');
+}
+
+// ======================================================
+// PROFILE
+// ======================================================
+function loadProfile(){
+  if(!currentUser)return;
+  document.getElementById('editName').value=currentUser.name;
+  document.getElementById('editUser').value=currentUser.username;
+  document.getElementById('editBio').value=currentUser.bio||'';
+  document.getElementById('editPass').value='';
+  refreshAvatars();
+}
+
+function saveProfile(){
+  const name=document.getElementById('editName').value.trim();
+  const u=document.getElementById('editUser').value.trim();
+  const bio=document.getElementById('editBio').value.trim();
+  const pass=document.getElementById('editPass').value;
+  if(!name||!u){showNotif('Nama dan username tidak boleh kosong!','error');return;}
+  const accs=getAccounts();
+  if(u!==currentUser.username&&accs.find(a=>a.username===u)){showNotif('Username sudah digunakan!','error');return;}
+  if(u!==currentUser.username){
+    const folders=getFolders(currentUser.username);
+    localStorage.removeItem('sn_f_'+currentUser.username);
+    saveFolders(u,folders);
+  }
+  const idx=accs.findIndex(a=>a.username===currentUser.username);
+  if(idx<0)return;
+  accs[idx].name=name; accs[idx].username=u; accs[idx].bio=bio;
+  if(pass.length>=6)accs[idx].password=pass;
+  if(currentUser.photo)accs[idx].photo=currentUser.photo;
+  saveAccounts(accs);
+  currentUser={...accs[idx]};
+  document.getElementById('heroBio').textContent=bio||'Sheira Najwa Azzaliya — seorang mahasiswi yang penuh semangat.';
+  updateStats();
+  showNotif('Profil berhasil disimpan! 🎉','success');
+}
+
+function changePhoto(input){
+  if(!input.files||!input.files[0])return;
+  const file=input.files[0];
+  if(file.size>2*1024*1024){showNotif('Ukuran foto maksimal 2MB!','error');return;}
+  const reader=new FileReader();
+  reader.onload=e=>{
+    currentUser.photo=e.target.result;
+    const accs=getAccounts();
+    const idx=accs.findIndex(a=>a.username===currentUser.username);
+    if(idx>=0){accs[idx].photo=e.target.result;saveAccounts(accs);}
+    refreshAvatars();
+    showNotif('Foto profil berhasil diubah! 📷','success');
+  };
+  reader.readAsDataURL(file);
+}
+
+// ======================================================
+// HELPERS
+// ======================================================
+function fileIcon(ext){
+  const m={pdf:'📄',doc:'📝',docx:'📝',jpg:'🖼️',jpeg:'🖼️',png:'🖼️',zip:'🗜️',rar:'🗜️',html:'🌐',css:'🎨',js:'⚡',txt:'📃'};
+  return m[(ext||'').toLowerCase()]||'📁';
+}
+function fmtSize(b){
+  if(!b)return'–';
+  if(b<1024)return b+'B';
+  if(b<1048576)return(b/1024).toFixed(1)+'KB';
+  return(b/1048576).toFixed(1)+'MB';
+}
+function openModal(id){document.getElementById(id).classList.add('show');}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+document.querySelectorAll('.modal-bg').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show');}));
+
+function showNotif(msg,type){
+  const el=document.createElement('div');
+  el.className='notif notif-'+type;
+  el.innerHTML=(type==='success'?'✅ ':'❌ ')+msg;
+  document.body.appendChild(el);
+  setTimeout(()=>{el.style.opacity='0';el.style.transform='translateX(20px)';el.style.transition='all 0.4s';setTimeout(()=>el.remove(),400);},3500);
+}
+</script>
+</body>
+</html>
